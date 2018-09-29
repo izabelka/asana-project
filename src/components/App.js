@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import './assets/css/reset.css';
+import '../assets/css/reset.css';
 import styled from 'styled-components';
 import {
   extractFromSearchParams,
   getAsanaProject,
   getAsanaTasks,
-} from './assets/functions/functions';
+} from '../assets/functions/functions';
+import Navbar from './Navbar';
 
 class App extends Component {
 
@@ -31,13 +32,16 @@ class App extends Component {
   render() {
     return (
       <Wrapper>
+        <Navbar/>
       </Wrapper>
     );
   }
 }
 
 const Wrapper = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
 `;
+
 export default App;
