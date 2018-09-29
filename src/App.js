@@ -2,32 +2,29 @@ import React, { Component } from 'react';
 import './assets/css/reset.css';
 import {
   extractFromSearchParams,
+  getAsanaProject,
+  getAsanaTasks,
 } from './assets/functions/functions';
-import {
-  getProject,
-  getTasks,
-} from './assets/functions/asanaApi'
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      project: '',
+      projectName: '',
+      tasks: [],
     };
   }
 
-  componentWillMount = () => {
-    this.setState({
-      project: extractFromSearchParams('project'),
-    });
-  }
-
   componentDidMount = async () => {
-    let project = await getProject(this.state.project);
-    let tasks = await getTasks(this.state.project)
-    console.log(project)
-    console.log(tasks)
+    let projectId = extractFromSearchParams('project');
+    let projectName = await getAsanaProject(projectId);
+    let tasks = await getAsanaTasks(projectId);
+
+    this.setState({
+      projectName,
+      tasks,
+    })
   }
 
   render() {

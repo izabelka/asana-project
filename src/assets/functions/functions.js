@@ -1,3 +1,8 @@
+import {
+  getProject,
+  getTasks,
+} from './asanaApi'
+
 export const extractFromSearchParams = (argKey) => {
   // look in current search params
   if (typeof window !== 'undefined' && window.location.search) {
@@ -7,4 +12,14 @@ export const extractFromSearchParams = (argKey) => {
     }
   }
   return '';
+}
+
+export const getAsanaProject = async (projectId) => {
+  let project = await getProject(projectId);
+  if (project && project.data.name) return project.data.name;
+}
+
+export const getAsanaTasks = async (projectId) => {
+  let tasks = await getTasks(projectId);
+  if (tasks && tasks.data) return tasks.data;
 }
