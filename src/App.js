@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './assets/css/reset.css';
+import styled from 'styled-components';
 import {
   extractFromSearchParams,
   getAsanaProject,
@@ -29,10 +30,14 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-      </div>
+      <Wrapper>
+      </Wrapper>
     );
   }
 }
 
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 export default App;
