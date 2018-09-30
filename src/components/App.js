@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../assets/css/reset.css';
+import '../assets/css/styles.css';
 import styled from 'styled-components';
 import {
   extractFromSearchParams,
@@ -59,7 +60,9 @@ class App extends Component {
       <Wrapper>
         <Navbar/>
         {this.state.appState === 'loading' &&
-          <Loading>{'loading'}</Loading>
+          <Loading>
+            {'loading'}
+          </Loading>
         }
         {this.state.appState === 'ready' &&
           <ProjectWrapper>
@@ -82,21 +85,30 @@ const Wrapper = styled.div`
   height: 100%;
   color: #151b26;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  padding: 100px;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: Helvetica Neue, Helvetica, sans-serif;
+  margin-top: 100px;
 `;
 
-const ProjectWrapper = styled.div``;
+const ProjectWrapper = styled.div`
+  padding: 34px;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  width: 60vw;
+  max-width: 480px;
+  min-height: 440px;
+`;
 
 const ProjectName = styled.h1`
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 2em;
+  font-weight: 700;
 `;
 
-const TasksWrapper = styled.div``;
+const TasksWrapper = styled.ul`
+  margin-top: 56px;
+`;
 
 const Info = styled.p``;
 
