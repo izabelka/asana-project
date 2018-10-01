@@ -142,7 +142,7 @@ const ProjectWrapper = styled.div`
   max-width: 480px;
   min-height: 440px;
   margin-bottom: 60px;
-  animation: ${Show} 1s;
+  animation: ${Show} 0.6s;
 `;
 
 const ProjectName = styled.h1`
