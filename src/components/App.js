@@ -44,6 +44,7 @@ class App extends Component {
         <Task
           key={task.id}
           task={task}
+          projectId={this.state.projectId}
         />
       ));
     }
@@ -99,6 +100,7 @@ const ProjectWrapper = styled.div`
   width: 60vw;
   max-width: 480px;
   min-height: 440px;
+  margin-bottom: 60px;
 `;
 
 const ProjectName = styled.h1`
