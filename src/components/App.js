@@ -32,7 +32,7 @@ class App extends Component {
 
   componentDidMount = async () => {
     let projectName = '',
-        tasks = '';
+        tasks = [];
     if (this.state.projectId) {
       projectName = await getAsanaProject(this.state.projectId);
       tasks = await getAsanaTasks(this.state.projectId);
@@ -151,7 +151,7 @@ const ProjectName = styled.h1`
 `;
 
 const TasksWrapper = styled.ul`
-  margin-top: 56px;
+  margin: 56px 0;
 `;
 
 const Info = styled.p``;
