@@ -1,0 +1,15 @@
+5c1bf95 Small changes to the `README` file
+f4382cc update `README` file
+dccf20f make `personalAccessToken` an environmental variable
+5e83010 minor style changes
+a40d461 small style changes
+fc54896 Handle error states
+73b3ff7 link a task to the associated task in `app.asana.com`
+fba914b Add a button for hiding tasks
+52ac67d add styles
+b15144e create `Task` component and add loading state
+0ec1857 move components to a separate folder, create `Navbar` component with Asana logo
+ddf7b10 install `styled-components` and use them in the project
+26cd4f3 move getting requests to functions.js and extract only necessary information
+b900413 make asana api calls work, and check it with some ui tests
+322917c Initialize project with create-react-app, remove unused files
