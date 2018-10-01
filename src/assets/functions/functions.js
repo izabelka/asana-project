@@ -16,10 +16,16 @@ export const extractFromSearchParams = (argKey) => {
 
 export const getAsanaProject = async (projectId) => {
   let project = await getProject(projectId);
-  if (project && project.data.name) return project.data.name;
+  if (project && project.data) {
+    return project.data.name;
+  }
+  return false;
 }
 
 export const getAsanaTasks = async (projectId) => {
   let tasks = await getTasks(projectId);
-  if (tasks && tasks.data) return tasks.data;
+  if (tasks && tasks.data) {
+    return tasks.data;
+  }
+  return false;
 }

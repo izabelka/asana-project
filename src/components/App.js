@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../assets/css/reset.css';
 import '../assets/css/styles.css';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import {
   extractFromSearchParams,
   getAsanaProject,
@@ -23,14 +23,20 @@ class App extends Component {
   }
 
   componentWillMount = () => {
+    let projectId = extractFromSearchParams('project');
+    projectId = projectId ? projectId : false;
     this.setState({
-      projectId: extractFromSearchParams('project'),
+      projectId,
     })
   }
 
   componentDidMount = async () => {
-    let projectName = await getAsanaProject(this.state.projectId);
-    let tasks = await getAsanaTasks(this.state.projectId);
+    let projectName = '',
+        tasks = '';
+    if (this.state.projectId) {
+      projectName = await getAsanaProject(this.state.projectId);
+      tasks = await getAsanaTasks(this.state.projectId);
+    }
     this.setState({
       projectName,
       tasks,
@@ -39,7 +45,7 @@ class App extends Component {
   }
 
   renderTasks = () => {
-    if (this.state.tasks.length > 0) {
+    if (this.state.tasks && this.state.tasks.length > 0) {
       return this.state.tasks.map((task) => (
         <Task
           key={task.id}
@@ -50,9 +56,15 @@ class App extends Component {
     }
 
     return (
-      <Info>
-        {'There are no tasks for this project'}
-      </Info>
+      <React.Fragment>
+        <Info>
+          {'There are no tasks for this project'}
+        </Info>
+        <Link
+          href={`https://app.asana.com/0/${this.state.projectId}`}>
+          {'Visit project in Asana App'}
+        </Link>
+      </React.Fragment>
     );
   }
 
@@ -61,24 +73,53 @@ class App extends Component {
       <Wrapper>
         <Navbar/>
         {this.state.appState === 'loading' &&
-          <Loading>
-            {'loading'}
-          </Loading>
+          <Loader/>
         }
-        {this.state.appState === 'ready' &&
+        {this.state.appState === 'ready' && this.state.projectName &&
           <ProjectWrapper>
             <ProjectName>
               {this.state.projectName}
             </ProjectName>
             <TasksWrapper>
-              {this.renderTasks()}
+              {this.state.projectName && this.renderTasks()}
             </TasksWrapper>
           </ProjectWrapper>
+        }
+        {this.state.appState === 'ready' && !this.state.projectId &&
+          <ErrorMessage>
+            {'No project ID provided'}
+          </ErrorMessage>
+        }
+        {this.state.appState === 'ready' && !this.state.projectName &&
+          this.state.projectId &&
+          <ErrorMessage>
+            {`Project with ID: ${this.state.projectId} was not found`}
+          </ErrorMessage>
         }
       </Wrapper>
     );
   }
 }
+
+const Show = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+`;
+
+const Loading = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+`;
 
 const Wrapper = styled.div`
   position: relative;
@@ -101,6 +142,7 @@ const ProjectWrapper = styled.div`
   max-width: 480px;
   min-height: 440px;
   margin-bottom: 60px;
+  animation: ${Show} 1s;
 `;
 
 const ProjectName = styled.h1`
@@ -114,6 +156,21 @@ const TasksWrapper = styled.ul`
 
 const Info = styled.p``;
 
-const Loading = styled.span``;
+const Link = styled.a`
+  color: #14aaf5;
+`;
+
+const ErrorMessage = styled.p`
+  color: red;
+`;
+
+const Loader = styled.div`
+  border: 4px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 4px solid #14aaf5;
+  width: 30px;
+  height: 30px;
+  animation: ${Loading} 2s linear infinite;
+`;
 
 export default App;
