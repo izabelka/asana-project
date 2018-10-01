@@ -12,10 +12,11 @@ You can also add this variable in step 4, instead of creating a file. Just run:
 4. Run the app:
 `npm start`
 
+## Fetching a project
 The webpage accepts an `Asana project ID` via query parameter `https://localhost:3000?project=project_ID`
 
 ## About the app
 - This App was created using [Create React App](https://github.com/facebookincubator/create-react-app).
 - It displays project name and its task.
 - User can visually hide tasks.
-- Each individual task links to the associated task in [app.asana.com](app.asana.com),
+- Each individual task links to the associated task in [app.asana.com](app.asana.com).
