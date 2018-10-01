@@ -1,6 +1,6 @@
 import request from 'superagent';
 
-const personalAccessToken = '0/7084127dee908bc3b8d0074b44d257da';
+const personalAccessToken = process.env.REACT_APP_PERSONAL_ACCESS_TOKEN;
 const projectsURL = 'https://app.asana.com/api/1.0/projects'
 
 export async function getProject(projectId) {
