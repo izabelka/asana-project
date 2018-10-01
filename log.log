@@ -1,3 +1,5 @@
+fc712c4 (HEAD -> master, origin/master) some more changes to the `README` file
+8cc5c44 add log file
 5c1bf95 Small changes to the `README` file
 f4382cc update `README` file
 dccf20f make `personalAccessToken` an environmental variable
